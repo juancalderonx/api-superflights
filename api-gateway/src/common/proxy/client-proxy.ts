@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { ConfigType } from '@nestjs/config';
 import {
   ClientProxy,
@@ -11,7 +11,8 @@ import EnvConfiguration from '../../config/env/env.config';
 @Injectable()
 export class ClientProxySuperFlights {
   constructor(
-    private readonly configEnv: ConfigType<typeof EnvConfiguration>,
+    @Inject(EnvConfiguration.KEY)
+    private configEnv: ConfigType<typeof EnvConfiguration>,
   ) {}
 
   clientProxyUsers(): ClientProxy {
