@@ -14,7 +14,7 @@ import { PassengerMSG } from 'src/common/proxy/constants';
 import { ClientProxySuperFlights } from './../common/proxy/client-proxy';
 import { PassengerDTO } from './dto/passenger.dto';
 
-@Controller('passenger')
+@Controller('passengers')
 export class PassengerController {
   constructor(private readonly clientProxy: ClientProxySuperFlights) {}
 
@@ -22,6 +22,7 @@ export class PassengerController {
 
   @Post()
   create(@Body() passengerDTO: PassengerDTO): Observable<IPassenger> {
+    console.log('controller del api');
     return this._clientProxyPassenger.send(PassengerMSG.CREATE, passengerDTO);
   }
 
@@ -31,13 +32,13 @@ export class PassengerController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Observable<IPassenger> {
+  findOne(@Param('id') id: number): Observable<IPassenger> {
     return this._clientProxyPassenger.send(PassengerMSG.FIND_ONE, id);
   }
 
   @Patch(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: number,
     @Body() passengerDTO: PassengerDTO,
   ): Observable<IPassenger> {
     return this._clientProxyPassenger.send(PassengerMSG.UPDATE, {
@@ -47,7 +48,7 @@ export class PassengerController {
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number): Observable<PassengerDTO> {
+  delete(@Param('id') id: number): Observable<PassengerDTO> {
     return this._clientProxyPassenger.send(PassengerMSG.DELETE, id);
   }
 }
