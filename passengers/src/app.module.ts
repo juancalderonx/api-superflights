@@ -1,10 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { EnvValidation } from './config';
-import { UserModule } from './user/user.module';
-import EnvConfiguration from './config/env/env.config';
+import { DatabaseModule } from './config/database/database.module';
 import { PassengerModule } from './passenger/passenger.module';
-import { FlightsModule } from './flights/flights.module';
+import EnvConfiguration from './config/env/env.config';
+import { EnvValidation } from './config';
 
 @Module({
   imports: [
@@ -14,9 +13,10 @@ import { FlightsModule } from './flights/flights.module';
       validationSchema: EnvValidation,
       envFilePath: ['.env.development'],
     }),
-    UserModule,
+
+    DatabaseModule,
+
     PassengerModule,
-    FlightsModule,
   ],
   controllers: [],
   providers: [],

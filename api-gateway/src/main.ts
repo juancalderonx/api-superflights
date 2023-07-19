@@ -21,5 +21,7 @@ async function bootstrap() {
   app.useGlobalInterceptors(new TimeoutInterceptor(configEnv));
 
   await app.listen(configEnv.APP_PORT);
+
+  console.log('API GATEWAY STARTED');
 }
 bootstrap();

@@ -8,12 +8,12 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: process.env.AMQP_URL,
-      queue: RabbitMQ.UserQueue,
+      queue: RabbitMQ.PassengerQueue,
     },
   });
 
   await app.listen();
 
-  console.log('USERS MICROSERVICE STARTED');
+  console.log('PASSENGERS MICROSERVICE STARTED');
 }
 bootstrap();
