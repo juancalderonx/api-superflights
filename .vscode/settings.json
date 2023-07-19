@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "api-gateway",
         "users",
-        "passengers"
+        "passengers",
+        "flights"
     ]
 }

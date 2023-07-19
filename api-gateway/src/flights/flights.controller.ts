@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, firstValueFrom } from 'rxjs';
 import {
   Body,
   Controller,
@@ -34,20 +34,20 @@ export class FlightController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Observable<IFlight> {
+  findOne(@Param('id') id: number): Observable<IFlight> {
     return this._clientProxyFlight.send(FlightMSG.FIND_ONE, id);
   }
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: number,
     @Body() flightDTO: FlightDTO,
   ): Observable<IFlight> {
     return this._clientProxyFlight.send(FlightMSG.UPDATE, { id, flightDTO });
   }
 
   @Delete(':id')
-  delete(@Param('id', ParseIntPipe) id: number): Observable<any> {
+  delete(@Param('id') id: number): Observable<any> {
     return this._clientProxyFlight.send(FlightMSG.DELETE, id);
   }
 
@@ -56,9 +56,9 @@ export class FlightController {
     @Param('flightId') flightId: number,
     @Param('passengerId') passengerId: number,
   ) {
-    const passenger = await this._clientProxyPassenger
-      .send(PassengerMSG.FIND_ONE, passengerId)
-      .toPromise();
+    const passenger = await firstValueFrom(
+      this._clientProxyPassenger.send(PassengerMSG.FIND_ONE, passengerId),
+    );
 
     if (!passenger)
       throw new HttpException('Passenger Not Found', HttpStatus.NOT_FOUND);
