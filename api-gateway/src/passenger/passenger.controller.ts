@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import {
   Body,
   Controller,
@@ -8,11 +9,10 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { PassengerDTO } from './dto/passenger.dto';
-import { Observable } from 'rxjs';
-import { ClientProxySuperFlights } from './../common/proxy/client-proxy';
 import { IPassenger } from 'src/common/interfaces/passenger.interface';
 import { PassengerMSG } from 'src/common/proxy/constants';
+import { ClientProxySuperFlights } from './../common/proxy/client-proxy';
+import { PassengerDTO } from './dto/passenger.dto';
 
 @Controller('passenger')
 export class PassengerController {
