@@ -22,6 +22,6 @@ async function bootstrap() {
 
   await app.listen(configEnv.APP_PORT);
 
-  console.log('API GATEWAY STARTED');
+  console.log('RUNNING API GATEWAY IN PORT ' + configEnv.APP_PORT);
 }
 bootstrap();

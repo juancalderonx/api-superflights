@@ -22,6 +22,7 @@ export class UserController {
   findOne(@Payload() id: string) {
     return this.userService.findOne(id);
   }
+
   @MessagePattern(UserMsg.UPDATE)
   update(@Payload() payload: any) {
     return this.userService.update(payload.id, payload.userDTO);
