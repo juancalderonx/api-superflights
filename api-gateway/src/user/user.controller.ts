@@ -32,20 +32,17 @@ export class UserController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): Observable<IUser> {
-    return this._clientProxyUser.send(UserMSG.FIND_ONE, { id });
+  findOne(@Param('id') id: number): Observable<IUser> {
+    return this._clientProxyUser.send(UserMSG.FIND_ONE, id);
   }
 
   @Patch(':id')
-  update(
-    @Param('id', ParseIntPipe) id: number,
-    @Body() userDto: UserDto,
-  ): Observable<IUser> {
+  update(@Param('id') id: number, @Body() userDto: UserDto): Observable<IUser> {
     return this._clientProxyUser.send(UserMSG.UPTADE, { id, userDto });
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number): Observable<IUser> {
-    return this._clientProxyUser.send(UserMSG.DELETE, { id });
+  remove(@Param('id') id: number): Observable<IUser> {
+    return this._clientProxyUser.send(UserMSG.DELETE, id);
   }
 }
